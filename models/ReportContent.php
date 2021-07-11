@@ -62,12 +62,12 @@ class ReportContent extends ContentAddonActiveRecord
      */
     public function rules()
     {
-        return array(
+        return [
             [['object_id', 'reason'], 'required'],
             [['object_id', 'created_by', 'updated_by'], 'integer',],
             ['created_at', 'string', 'max' => 45],
             [['updated_at'], 'safe']
-        );
+        ];
     }
 
     /**
@@ -129,7 +129,7 @@ class ReportContent extends ContentAddonActiveRecord
 
         // Check if post exists
         if (ReportContent::findOne(['object_model' => $post->className(), 'object_id' => $post->id, 'created_by' => $user->id]) !== null) {
-            return false;
+            return true;
         }
 
         // Don't report system admin content
